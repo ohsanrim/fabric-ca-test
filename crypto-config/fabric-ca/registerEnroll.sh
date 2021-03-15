@@ -1,5 +1,19 @@
 #!/bin/bash
+function createTLS(){
+  infoln "Enrolling the CA tls"
+  mkdir -p crypto-config/fabric-ca/tls/admin
+  #cp $HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem $HOME/testnet/crypto-config/fabric-ca/tls/tls-ca-cert.pem
+  
+  export FABRIC_CA_CLIENT_TLS_CERTFILES=$HOME/testnet/crypto-config/fabric-ca/tls/tls-cert.pem
+  export FABRIC_CA_CLIENT_HOME=crypto-config/fabric-ca/tls/admin
+  fabric-ca-client enroll -d -u https://tls-ca-admin:tls-ca-adminpw@localhost:10054 --caname ca_tls --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
+  fabric-ca-client register -d --id.name peer0-org1 --id.secret peer0PW --id.type peer -u https://localhost:10054 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
+  fabric-ca-client register -d --id.name peer1-org1 --id.secret peer1PW --id.type peer -u https://localhost:10054 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
+  fabric-ca-client register -d --id.name peer2-org2 --id.secret peer2PW --id.type peer -u https://localhost:10054 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
+  fabric-ca-client register -d --id.name peer3-org2 --id.secret peer3PW --id.type peer -u https://localhost:10054 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
+  fabric-ca-client register -d --id.name orderer0-org --id.secret orderer0PW --id.type orderer -u https://localhost:10054 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
 
+}
 function createOrg1() {
   infoln "Enrolling the CA admin"
   mkdir -p crypto-config/peerOrganizations/org1.example.com/
@@ -51,10 +65,10 @@ function createOrg1() {
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org1.example.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/config.yaml
-
-  infoln "Generating the peer0-tls certificates"
+#fabric-ca-client register -d --id.name peer0-org1 --id.secret peer0PW --id.type peer -u https://localhost:10054
+  infoln "Generating the peer0-tls certificates" #add
   set -x
-  fabric-ca-client enroll -u https://peer0:peer0pw@localhost:7054 --caname ca_org1 -M ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls --enrollment.profile tls --csr.hosts peer0 --csr.hosts localhost --tls.certfiles ${PWD}/crypto-config/fabric-ca/org1/tls-cert.pem
+  fabric-ca-client enroll -u https://peer0-org1:peer0PW@localhost:10054 --caname ca_tls -M ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls --enrollment.profile tls --csr.hosts peer0 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem  #add
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
@@ -76,10 +90,10 @@ function createOrg1() {
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org1.example.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp/config.yaml
-
+#fabric-ca-client register -d --id.name peer1-org1 --id.secret peer1PW --id.type peer -u https://localhost:10054
   infoln "Generating the peer1-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer1:peer1pw@localhost:7054 --caname ca_org1 -M ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls --enrollment.profile tls --csr.hosts peer1 --csr.hosts localhost --tls.certfiles ${PWD}/crypto-config/fabric-ca/org1/tls-cert.pem
+  fabric-ca-client enroll -u https://peer1-org1:peer1PW@localhost:10054 --caname ca_tls -M ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls --enrollment.profile tls --csr.hosts peer1 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt
@@ -154,10 +168,10 @@ function createOrg2() {
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org2.example.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/msp/config.yaml
-
+#fabric-ca-client register -d --id.name peer2-org2 --id.secret peer2PW --id.type peer -u https://localhost:10054
   infoln "Generating the peer2-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer2:peer2pw@localhost:8054 --caname ca_org2 -M ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls --enrollment.profile tls --csr.hosts peer2 --csr.hosts localhost --tls.certfiles ${PWD}/crypto-config/fabric-ca/org2/tls-cert.pem
+  fabric-ca-client enroll -u https://peer2-org2:peer2PW@localhost:10054 --caname ca_tls -M ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls --enrollment.profile tls --csr.hosts peer2 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/ca.crt
@@ -179,10 +193,10 @@ function createOrg2() {
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org2.example.com/msp/config.yaml ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer3.org2.example.com/msp/config.yaml
-
+#fabric-ca-client register -d --id.name peer3-org2 --id.secret peer3PW --id.type peer -u https://localhost:10054
   infoln "Generating the peer3-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://peer3:peer3pw@localhost:8054 --caname ca_org2 -M ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer3.org2.example.com/tls --enrollment.profile tls --csr.hosts peer3 --csr.hosts localhost --tls.certfiles ${PWD}/crypto-config/fabric-ca/org2/tls-cert.pem
+  fabric-ca-client enroll -u https://peer3-org2:peer3PW@localhost:10054 --caname ca_tls -M ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer3.org2.example.com/tls --enrollment.profile tls --csr.hosts peer3 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer3.org2.example.com/tls/tlscacerts/* ${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer3.org2.example.com/tls/ca.crt
@@ -247,10 +261,10 @@ function createOrderer() {
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/ordererOrganizations/example.com/msp/config.yaml ${PWD}/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/config.yaml
-
+#  fabric-ca-client register -d --id.name orderer0-org --id.secret orderer0PW --id.type orderer -u https://localhost:10054
   infoln "Generating the orderer-tls certificates"
   set -x
-  fabric-ca-client enroll -u https://orderer:ordererpw@localhost:9054 --caname ca_ordererOrg -M ${PWD}/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls --enrollment.profile tls --csr.hosts orderer0 --csr.hosts localhost --tls.certfiles ${PWD}/crypto-config/fabric-ca/ordererOrg/tls-cert.pem
+  fabric-ca-client enroll -u https://orderer0-org:orderer0PW@localhost:10054 --caname ca_tls -M ${PWD}/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls --enrollment.profile tls --csr.hosts orderer0 --tls.certfiles ${PWD}/crypto-config/fabric-ca/tls/tls-cert.pem
   { set +x; } 2>/dev/null
 
   cp ${PWD}/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/tlscacerts/* ${PWD}/crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/ca.crt

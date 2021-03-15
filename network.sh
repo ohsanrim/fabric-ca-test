@@ -138,6 +138,10 @@ function createOrgs() {
       fi
     done
 
+    infoln "Creating TLS Identities"
+
+    createTLS
+
     infoln "Creating Org1 Identities"
 
     createOrg1
@@ -280,10 +284,11 @@ function networkDown() {
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/org1/msp crypto-config/fabric-ca/org1/tls-cert.pem crypto-config/fabric-ca/org1/ca-cert.pem crypto-config/fabric-ca/org1/IssuerPublicKey crypto-config/fabric-ca/org1/IssuerRevocationPublicKey crypto-config/fabric-ca/org1/fabric-ca-server.db'
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/org2/msp crypto-config/fabric-ca/org2/tls-cert.pem crypto-config/fabric-ca/org2/ca-cert.pem crypto-config/fabric-ca/org2/IssuerPublicKey crypto-config/fabric-ca/org2/IssuerRevocationPublicKey crypto-config/fabric-ca/org2/fabric-ca-server.db'
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/ordererOrg/msp crypto-config/fabric-ca/ordererOrg/tls-cert.pem crypto-config/fabric-ca/ordererOrg/ca-cert.pem crypto-config/fabric-ca/ordererOrg/IssuerPublicKey crypto-config/fabric-ca/ordererOrg/IssuerRevocationPublicKey crypto-config/fabric-ca/ordererOrg/fabric-ca-server.db'
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/tls/msp crypto-config/fabric-ca/tls/tls-cert.pem crypto-config/fabric-ca/tls/ca-cert.pem crypto-config/fabric-ca/tls/IssuerPublicKey crypto-config/fabric-ca/tls/IssuerRevocationPublicKey crypto-config/fabric-ca/tls/fabric-ca-server.db crypto-config/fabric-ca/tls/admin'
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf addOrg3/fabric-ca/org3/msp addOrg3/fabric-ca/org3/tls-cert.pem addOrg3/fabric-ca/org3/ca-cert.pem addOrg3/fabric-ca/org3/IssuerPublicKey addOrg3/fabric-ca/org3/IssuerRevocationPublicKey addOrg3/fabric-ca/org3/fabric-ca-server.db'
     # remove channel and script artifacts
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf channel-artifacts log.txt *.tar.gz'
-    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf /tmp/hyperledger '
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf /tmp/hyperledger'
   fi
 }
 

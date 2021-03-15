@@ -10,22 +10,22 @@ networks:
 
 services:
 
-#  ca-tls:
-#    container_name: ca-tls
-#    image: hyperledger/fabric-ca:latest
-#    command: sh -c 'fabric-ca-server start -b tls-ca-admin:tls-ca-adminpw --port 10054'
-#    environment:
-#      - FABRIC_CA_SERVER_HOME=/tmp/hyperledger/fabric-ca/crypto
-#      - FABRIC_CA_SERVER_TLS_ENABLED=true
-#      - FABRIC_CA_SERVER_CSR_CN=ca-tls
-#      - FABRIC_CA_SERVER_CSR_HOSTS=0.0.0.0
-#      - FABRIC_CA_SERVER_DEBUG=true
-#    volumes:
-#      - $HOME/testnet/crypto-config/fabric-ca/tls:/tmp/hyperledger/fabric-ca/crypto
-#    networks:
-#      - test
-#    ports:
-#      - 10054:10054
+  ca-tls:
+    container_name: ca-tls
+    image: hyperledger/fabric-ca:latest
+    command: sh -c 'fabric-ca-server start -d -b tls-ca-admin:tls-ca-adminpw --port 10054'
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca_tls
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=10054
+      - FABRIC_CA_SERVER_DEBUG=true  
+    volumes:
+      - $HOME/testnet/crypto-config/fabric-ca/tls:/etc/hyperledger/fabric-ca-server
+    networks:
+      - test
+    ports:
+      - 10054:10054
       
   ca_org1:
     image: hyperledger/fabric-ca:latest
