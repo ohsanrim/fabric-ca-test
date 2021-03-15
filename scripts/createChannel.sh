@@ -37,7 +37,7 @@ peer channel create -o orderer0:7050 -c $CHANNEL_NAME --ordererTLSHostnameOverri
 
 # joinChannel ORG
 joinChannel() {
-  FABRIC_CFG_PATH=$PWD/../config/
+  FABRIC_CFG_PATH=$PWD
   ORG=$1
   setGlobals $ORG
 	local rc=1
@@ -61,13 +61,13 @@ setAnchorPeer() {
   docker exec cli ./scripts/setAnchorPeer.sh $ORG $CHANNEL_NAME 
 }
 
-FABRIC_CFG_PATH=${PWD}/configtx
+FABRIC_CFG_PATH=${PWD}
 
 ## Create channeltx
 infoln "Generating channel create transaction '${CHANNEL_NAME}.tx'"
 createChannelTx
 
-FABRIC_CFG_PATH=$PWD/../config/
+FABRIC_CFG_PATH=$PWD
 BLOCKFILE="./channel-artifacts/${CHANNEL_NAME}.block"
 
 ## Create channelf
@@ -76,14 +76,17 @@ createChannel
 successln "Channel '$CHANNEL_NAME' created"
 
 ## Join all the peers to the channel
-infoln "Joining org1 peer to the channel..."
+infoln "Joining org1 peer0 to the channel..."
+joinChannel 0
+infoln "Joining org1 peer1 to the channel..."
 joinChannel 1
-infoln "Joining org2 peer to the channel..."
+infoln "Joining org2 peer2 to the channel..."
 joinChannel 2
+
 
 ## Set the anchor peers for each org in the channel
 infoln "Setting anchor peer for org1..."
-setAnchorPeer 1
+setAnchorPeer 0
 infoln "Setting anchor peer for org2..."
 setAnchorPeer 2
 
