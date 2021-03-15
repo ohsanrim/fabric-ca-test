@@ -6,7 +6,6 @@ OrdererOrgs:
       - Hostname: orderer0
         SANS:
           - localhostMSP
-          - 10.0.1.31
           - orderer0
           
 PeerOrgs:
@@ -16,7 +15,8 @@ PeerOrgs:
     Template:
       Count: 2
       SANS:
-        - localhost   
+        - peer0
+        - peer1  
     Users: 
       Count: 2
              
@@ -27,6 +27,7 @@ PeerOrgs:
       Count: 2
       Start: 2
       SANS:
-        - localhost  
+        - peer2
+        - peer3
     Users: 
       Count: 2      

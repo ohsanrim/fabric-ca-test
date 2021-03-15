@@ -55,7 +55,7 @@ Organizations:
 
         MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
         AnchorPeers: 
-            - Host: peer0
+            - Host: peer2
               Port: 7051
         Policies:
             Readers:
