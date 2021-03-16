@@ -131,7 +131,7 @@ function createOrgs() {
 
   while :
     do
-      if [ ! -f "$HOME/testnet/crypto-config/fabric-ca/org1/tls-cert.pem" ]; then
+      if [ ! -f "$HOME/testnet/crypto-config/fabric-ca/tls/tls-cert.pem" ]; then
         sleep 1
       else
         break
