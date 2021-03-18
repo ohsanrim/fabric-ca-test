@@ -223,7 +223,7 @@ function networkUp() {
   ## generate artifacts if they don't exist
   if [ ! -d "crypto-config/peerOrganizations" ]; then
     createOrgs
-    createConsortium
+   # createConsortium
   fi
 
   COMPOSE_FILES="-f ${COMPOSE_FILE_BASE}"
