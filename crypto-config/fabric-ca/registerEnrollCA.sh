@@ -79,7 +79,7 @@ function createOrg2() {
 }
 
 
-function createOrderer() {
+function createOrderer0() {
   infoln "Enrolling the CA admin"
   mkdir -p crypto-config/ordererOrganizations/example.com
   

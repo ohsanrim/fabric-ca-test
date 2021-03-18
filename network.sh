@@ -2,6 +2,19 @@ export VERBOSE=false
 
 . scripts/utils.sh
 
+function clearContainers() {
+  docker rm -f $(docker ps -a -q)
+}
+
+function removeUnwantedImages() {
+  DOCKER_IMAGE_IDS=$(docker images | awk '($1 ~ /dev-peer.*/) {print $3}')
+  if [ -z "$DOCKER_IMAGE_IDS" -o "$DOCKER_IMAGE_IDS" == " " ]; then
+    infoln "No images available for deletion"
+  else
+    docker rmi -f $DOCKER_IMAGE_IDS
+  fi
+}
+
 function networkUp(){
   if [  "$CRYPTO" == "Certificate Authorities" ]; then
     #start with CA
@@ -25,11 +38,46 @@ function networkUp(){
       ./crypto-config/fabric-ca/registerEnroll.sh $TYPE
       PWD=$HOME/testnet/peer/org2/peer
       peer node start
-    elif [ "$TYPE" == "FABRIC_CA" ]; then 
-      ./crypto-config/fabric-ca/registerEnrollCA.sh $TYPE
-    fi 
+    elif [ "$TYPE" == "FABRIC_CA" ]; then
+    infoln "Generating certificates using Fabric CA"
+
+    IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
+
+    . crypto-config/fabric-ca/registerEnrollCA.sh
+
+  while :
+    do
+      if [ ! -f "$HOME/testnet/crypto-config/fabric-ca/tls/tls-cert.pem" ]; then
+        sleep 1
+      else
+        break
+      fi
+    done
+
+    infoln "Creating TLS Identities"
+
+    createTLS
+
+    infoln "Creating Org1 Identities"
+
+    createOrg1
+
+    infoln "Creating Org2 Identities"
+
+    createOrg2
+
+    infoln "Creating Orderer Org Identities"
+
+    createOrderer0
     
+    docker ps -a
     
+    ./transport.sh
+    if [ $? -ne 0 ]; then
+      fatalln "Unable to start network"
+    fi
+  fi
+       
   elif [ "$CRYPTO" == "cryptogen" ]; then
     #start with cryptogen
       if [ ! -f "$HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem" ]; then
@@ -61,6 +109,11 @@ function deployCC() {
 }
 
 function stopOrderer(){
+
+    docker-compose -f $COMPOSE_FILE_CA down --volumes --remove-orphans
+    clearContainers
+    #Cleanup images
+    removeUnwantedImages
 infoln "Stopping network" 
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf system-genesis-block/*.block crypto-config/peerOrganizations crypto-config/ordererOrganizations'
      
@@ -231,7 +284,7 @@ while [[ $# -ge 1 ]] ; do
 done
 
 if [ "$MODE" == "up" ]; then
-  infoln "StartOrderer network"  
+  infoln "Start network"  
   networkUp
 elif [ "${MODE}" == "createChannel" ]; then
   createChannel  
