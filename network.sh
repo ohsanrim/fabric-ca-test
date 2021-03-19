@@ -21,23 +21,23 @@ function networkUp(){
     if [ "$TYPE" == "orderer0" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh all
       configtxgen -profile TwoOrgsOrdererGenesis -channelID system-channel -outputBlock system-genesis-block/genesis.block
-      orderer start
+      orderer start >&log.txt
     elif [ "$TYPE" == "peer0" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh org1
       PWD=$HOME/testnet/peer/org1/peer0
-      peer node start
+      peer node start >&log.txt
     elif [ "$TYPE" == "peer1" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh org1
       PWD=$HOME/testnet/peer/org1/peer1
-      peer node start  
+      peer node start >&log.txt
     elif [ "$TYPE" == "peer2" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh org2
       PWD=$HOME/testnet/peer/org2/peer2
-      peer node start  
+      peer node start >&log.txt 
     elif [ "$TYPE" == "peer3" ]; then 
       ./crypto-config/fabric-ca/registerEnroll.sh $TYPE
       PWD=$HOME/testnet/peer/org2/peer
-      peer node start
+      peer node start >&log.txt
     elif [ "$TYPE" == "FABRIC_CA" ]; then
     infoln "Generating certificates using Fabric CA"
 
@@ -84,7 +84,7 @@ function networkUp(){
         errorln "certificate files not found..."
         break
       else 
-        orderer start
+        orderer start >&log.txt
       fi
    fi
 }
