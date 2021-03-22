@@ -1,14 +1,14 @@
 NodeOUs:
   Enable: true
   ClientOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/ca.org2.example.com-cert.pem
     OrganizationalUnitIdentifier: client
   PeerOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/ca.org2.example.com-cert.pem
     OrganizationalUnitIdentifier: peer
   AdminOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/ca.org2.example.com-cert.pem
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/ca.org2.example.com-cert.pem
     OrganizationalUnitIdentifier: orderer
