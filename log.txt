@@ -1,2 +1,2 @@
-[34m2021-03-22 12:16:55.248 KST [channelCmd] InitCmdFactory -> INFO 001[0m Endorser and orderer connections initialized
-[34m2021-03-22 12:16:55.256 KST [channelCmd] update -> INFO 002[0m Successfully submitted channel update
+[34m2021-03-22 13:39:15.476 KST [channelCmd] InitCmdFactory -> INFO 001[0m Endorser and orderer connections initialized
+[34m2021-03-22 13:39:15.488 KST [channelCmd] update -> INFO 002[0m Successfully submitted channel update
