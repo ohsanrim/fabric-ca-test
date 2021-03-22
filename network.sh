@@ -21,7 +21,7 @@ function networkUp(){
     if [ "$TYPE" == "orderer0" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh all
       configtxgen -profile TwoOrgsOrdererGenesis -channelID system-channel -outputBlock system-genesis-block/genesis.block
-      orderer start >&log.txt
+      orderer start
     elif [ "$TYPE" == "peer0" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh org1
       PWD=$HOME/testnet/peer/org1/peer0
