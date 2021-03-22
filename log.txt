@@ -1,2 +1,0 @@
-[34m2021-03-19 17:14:31.301 KST 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
-[34m2021-03-19 17:14:31.308 KST 0002 INFO[0m [channelCmd] [34;1mupdate[0m -> Successfully submitted channel update
