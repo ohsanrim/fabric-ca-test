@@ -31,13 +31,13 @@
 #   For example, see "tls.certfile" and "tls.clientauth.certfiles".
 #   The value of each of these fields can be a simple filename, a
 #   relative path, or an absolute path.  If the value is not an
-#   absolute path, it is interpreted as being relative to the location
+#   absolute path, it is interpretted as being relative to the location
 #   of this configuration file.
 #
 #############################################################################
 
 # Version of config file
-version: 1.5.1-snapshot-c8d2ffb6
+version: 1.4.9
 
 # Server's listening port (default: 7054)
 port: 7054
@@ -66,10 +66,10 @@ crlsizelimit: 512000
 #############################################################################
 tls:
   # Enable TLS (default: false)
-  enabled: false
+  enabled: true
   # TLS for the server's listening port
-  certfile:
-  keyfile:
+  certfile: tls/cert.pem
+  keyfile: tls/key.pem
   clientauth:
     type: noclientcert
     certfiles:
@@ -78,14 +78,15 @@ tls:
 #  The CA section contains information related to the Certificate Authority
 #  including the name of the CA, which should be unique for all members
 #  of a blockchain network.  It also includes the key and certificate files
-#  used when issuing enrollment certificates (ECerts).
+#  used when issuing enrollment certificates (ECerts) and transaction
+#  certificates (TCerts).
 #  The chainfile (if it exists) contains the certificate chain which
 #  should be trusted for this CA, where the 1st in the chain is always the
 #  root CA certificate.
 #############################################################################
 ca:
   # Name of this CA
-  name:
+  name: org1_ica
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)
@@ -108,7 +109,9 @@ crl:
 #  The registry section controls how the fabric-ca-server does two things:
 #  1) authenticates enrollment requests which contain a username and password
 #     (also known as an enrollment ID and secret).
-#  2) once authenticated, retrieves the identity's attribute names and values.
+#  2) once authenticated, retrieves the identity's attribute names and
+#     values which the fabric-ca-server optionally puts into TCerts
+#     which it issues for transacting on the Hyperledger Fabric blockchain.
 #     These attributes are useful for making access control decisions in
 #     chaincode.
 #  There are two main configuration options:
@@ -304,7 +307,7 @@ signing:
 #     CA certificates though it can still issue end entity certificates.
 ###########################################################################
 csr:
-   cn: fabric-ca-server
+   cn: 
    keyrequest:
      algo: ecdsa
      size: 256
@@ -315,11 +318,11 @@ csr:
         O: Hyperledger
         OU: Fabric
    hosts:
-     - fabric-ca
+     - 1a1f3eea4a47
      - localhost
    ca:
       expiry: 131400h
-      pathlength: 1
+      pathlength: 0
 
 ###########################################################################
 # Each CA can issue both X509 enrollment certificate as well as Idemix
@@ -420,17 +423,17 @@ cafiles:
 #     is enabled on server
 #############################################################################
 intermediate:
-  parentserver:
-    url:
-    caname:
+  parentserver: 
+    url: https://rcaadmin:rcaadminpw@fabric-ca:6054
+    caname: rcaadmin
 
   enrollment:
-    hosts:
-    profile:
+    hosts: fabric-ca
+    profile: ca
     label:
 
   tls:
-    certfiles:
+    certfiles: tls/tls-ca-cert.pem
     client:
       certfile:
       keyfile:
@@ -454,7 +457,7 @@ cfg:
 ###############################################################################
 operations:
     # host and port for the operations server
-    listenAddress: 127.0.0.1:9443
+    listenAddress: 127.0.0.1:9445
 
     # TLS configuration for the operations endpoint
     tls:
@@ -493,9 +496,9 @@ metrics:
         # statsd server address
         address: 127.0.0.1:8125
 
-        # the interval at which locally cached counters and gauges are pushed
+        # the interval at which locally cached counters and gauges are pushsed
         # to statsd; timings are pushed immediately
         writeInterval: 10s
 
-        # prefix is prepended to all emitted statsd metrics
+        # prefix is prepended to all emitted statsd merics
         prefix: server

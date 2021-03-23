@@ -125,7 +125,11 @@ infoln "Stopping network"
     
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/tls/msp crypto-config/fabric-ca/tls/tls-cert.pem crypto-config/fabric-ca/tls/ca-cert.pem crypto-config/fabric-ca/tls/IssuerPublicKey crypto-config/fabric-ca/tls/IssuerRevocationPublicKey crypto-config/fabric-ca/tls/fabric-ca-server.db crypto-config/fabric-ca/tls/admin'
     
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/root/msp crypto-config/fabric-ca/root/tls-cert.pem crypto-config/fabric-ca/root/ca-cert.pem crypto-config/fabric-ca/root/IssuerPublicKey crypto-config/fabric-ca/root/IssuerRevocationPublicKey crypto-config/fabric-ca/root/fabric-ca-server.db '
+    
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf Org1MSPanchors.tx Org1MSPconfig.json Org1MSPmodified_config.json Org2MSPanchors.tx Org2MSPconfig.json Org2MSPmodified_config.json config_update.json config_update.pb config_update_in_envelope.json modified_config.pb original_config.pb config_block.pb'
+    
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/fabric-ca-server-int-ca/msp crypto-config/fabric-ca/fabric-ca-server-int-ca/tls'
     
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf channel-artifacts log.txt *.tar.gz'
     

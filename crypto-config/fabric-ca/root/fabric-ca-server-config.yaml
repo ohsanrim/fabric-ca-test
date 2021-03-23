@@ -31,7 +31,7 @@
 #   For example, see "tls.certfile" and "tls.clientauth.certfiles".
 #   The value of each of these fields can be a simple filename, a
 #   relative path, or an absolute path.  If the value is not an
-#   absolute path, it is interpretted as being relative to the location
+#   absolute path, it is interpreted as being relative to the location
 #   of this configuration file.
 #
 #############################################################################
@@ -40,7 +40,7 @@
 version: 1.4.9
 
 # Server's listening port (default: 7054)
-port: 9054
+port: 6054
 
 # Cross-Origin Resource Sharing (CORS)
 cors:
@@ -78,15 +78,14 @@ tls:
 #  The CA section contains information related to the Certificate Authority
 #  including the name of the CA, which should be unique for all members
 #  of a blockchain network.  It also includes the key and certificate files
-#  used when issuing enrollment certificates (ECerts) and transaction
-#  certificates (TCerts).
+#  used when issuing enrollment certificates (ECerts).
 #  The chainfile (if it exists) contains the certificate chain which
 #  should be trusted for this CA, where the 1st in the chain is always the
 #  root CA certificate.
 #############################################################################
 ca:
   # Name of this CA
-  name: ordererOrg_admin
+  name: rcaadmin
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)
@@ -109,9 +108,7 @@ crl:
 #  The registry section controls how the fabric-ca-server does two things:
 #  1) authenticates enrollment requests which contain a username and password
 #     (also known as an enrollment ID and secret).
-#  2) once authenticated, retrieves the identity's attribute names and
-#     values which the fabric-ca-server optionally puts into TCerts
-#     which it issues for transacting on the Hyperledger Fabric blockchain.
+#  2) once authenticated, retrieves the identity's attribute names and values.
 #     These attributes are useful for making access control decisions in
 #     chaincode.
 #  There are two main configuration options:
@@ -129,8 +126,8 @@ registry:
 
   # Contains identity information which is used when LDAP is disabled
   identities:
-     - name: ordererOrg_admin
-       pass: ordererOrg_adminpw
+     - name: rcaadmin
+       pass: rcaadminpw
        type: client
        affiliation: ""
        attrs:
@@ -278,7 +275,7 @@ signing:
          expiry: 43800h
          caconstraint:
            isca: true
-           maxpathlen: 0
+           maxpathlen: 2
       tls:
          usage:
             - signing
@@ -307,7 +304,7 @@ signing:
 #     CA certificates though it can still issue end entity certificates.
 ###########################################################################
 csr:
-   cn: 
+   cn: fabric-ca-server
    keyrequest:
      algo: ecdsa
      size: 256
@@ -318,11 +315,11 @@ csr:
         O: Hyperledger
         OU: Fabric
    hosts:
-     - 1a1f3eea4a47
+     - fabric-ca
      - localhost
    ca:
       expiry: 131400h
-      pathlength: 0
+      pathlength: 1
 
 ###########################################################################
 # Each CA can issue both X509 enrollment certificate as well as Idemix
@@ -423,17 +420,17 @@ cafiles:
 #     is enabled on server
 #############################################################################
 intermediate:
-  parentserver: 
-    url: https://rcaadmin:rcaadminpw@fabric-ca:6054
-    caname: rcaadmin
+  parentserver:
+    url:
+    caname:
 
   enrollment:
-    hosts: fabric-ca
-    profile: ca
+    hosts:
+    profile:
     label:
 
   tls:
-    certfiles: tls/tls-ca-cert.pem
+    certfiles:
     client:
       certfile:
       keyfile:
@@ -457,7 +454,7 @@ cfg:
 ###############################################################################
 operations:
     # host and port for the operations server
-    listenAddress: 127.0.0.1:9447
+    listenAddress: fabric-ca:9444
 
     # TLS configuration for the operations endpoint
     tls:
@@ -496,9 +493,9 @@ metrics:
         # statsd server address
         address: 127.0.0.1:8125
 
-        # the interval at which locally cached counters and gauges are pushsed
+        # the interval at which locally cached counters and gauges are pushed
         # to statsd; timings are pushed immediately
         writeInterval: 10s
 
-        # prefix is prepended to all emitted statsd merics
+        # prefix is prepended to all emitted statsd metrics
         prefix: server
