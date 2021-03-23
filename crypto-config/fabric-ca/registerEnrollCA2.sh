@@ -76,13 +76,6 @@ cp $HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem $HOME/testnet/crypto-co
 fabric-ca-server start --port 7054
 #docker-compose -f docker/docker-compose-org1-ica.yaml up -d
 
-cd $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client
-export FABRIC_CA_CLIENT_HOME=${PWD}
-
-fabric-ca-client enroll -d -u https://org1_admin:org1_adminpw@fabric-ca:7054 --tls.certfiles tls-root-cert/tls-ca-cert.pem --csr.hosts fabric-ca --mspdir int-ca/org1_admin/msp
-
-export FABRIC_CA_SERVER_HOME=$HOME/testnet/crypto-config/fabric-ca/org1
-
 ####################################################################
 #Deploy an intermediate Org2 CA
 mkdir -p $HOME/testnet/crypto-config/fabric-ca/org2/tls
@@ -95,13 +88,6 @@ cp $HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem $HOME/testnet/crypto-co
 fabric-ca-server start --port 8054
 #docker-compose -f docker/docker-compose-org2-ica.yaml up -d
 
-cd $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client
-export FABRIC_CA_CLIENT_HOME=${PWD}
-
-fabric-ca-client enroll -d -u https://org2_admin:org2_adminpw@fabric-ca:8054 --tls.certfiles tls-root-cert/tls-ca-cert.pem --csr.hosts fabric-ca --mspdir intt-ca/org2_admin/msp
-
-export FABRIC_CA_SERVER_HOME=$HOME/testnet/crypto-config/fabric-ca/org2
-
 ####################################################################
 #Deploy an intermediate OrdererOrg CA
 mkdir -p $HOME/testnet/crypto-config/fabric-ca/ordererOrg/tls
@@ -113,11 +99,3 @@ cp $HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem $HOME/testnet/crypto-co
 
 fabric-ca-server start --port 9054
 #docker-compose -f docker/docker-compose-ordererOrg-ica.yaml up -d
-
-cd $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client
-export FABRIC_CA_CLIENT_HOME=${PWD}
-
-fabric-ca-client enroll -d -u https://ordererOrg_admin:ordererOrg_adminpw@fabric-ca:9054 --tls.certfiles tls-root-cert/tls-ca-cert.pem --csr.hosts fabric-ca --mspdir int-ca/ordererOrg_admin/msp
-
-export FABRIC_CA_SERVER_HOME=$HOME/testnet/crypto-config/fabric-ca/ordererOrg
-

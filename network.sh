@@ -41,7 +41,7 @@ function networkUp(){
     elif [ "$TYPE" == "FABRIC_CA" ]; then
     infoln "Generating certificates using Fabric CA"
 
-    IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
+    #IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
 
     . crypto-config/fabric-ca/registerEnrollCA.sh
 
@@ -117,19 +117,19 @@ function stopOrderer(){
 infoln "Stopping network" 
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf system-genesis-block/*.block crypto-config/peerOrganizations crypto-config/ordererOrganizations'
      
-    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/org1/msp crypto-config/fabric-ca/org1/ca-cert.pem crypto-config/fabric-ca/org1/tls-cert.pem crypto-config/fabric-ca/org1/IssuerPublicKey crypto-config/fabric-ca/org1/IssuerRevocationPublicKey crypto-config/fabric-ca/org1/fabric-ca-server.db'
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/org1/msp crypto-config/fabric-ca/org1/tls crypto-config/fabric-ca/org1/ca-chain.pem crypto-config/fabric-ca/org1/ca-cert.pem crypto-config/fabric-ca/org1/tls-cert.pem crypto-config/fabric-ca/org1/IssuerPublicKey crypto-config/fabric-ca/org1/IssuerRevocationPublicKey crypto-config/fabric-ca/org1/fabric-ca-server.db'
     
-    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/org2/msp crypto-config/fabric-ca/org2/tls-cert.pem crypto-config/fabric-ca/org2/ca-cert.pem crypto-config/fabric-ca/org2/IssuerPublicKey crypto-config/fabric-ca/org2/IssuerRevocationPublicKey crypto-config/fabric-ca/org2/fabric-ca-server.db'
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/org2/msp crypto-config/fabric-ca/org2/tls crypto-config/fabric-ca/org2/ca-chain.pem crypto-config/fabric-ca/org2/tls-cert.pem crypto-config/fabric-ca/org2/ca-cert.pem crypto-config/fabric-ca/org2/IssuerPublicKey crypto-config/fabric-ca/org2/IssuerRevocationPublicKey crypto-config/fabric-ca/org2/fabric-ca-server.db'
     
-    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/ordererOrg/msp crypto-config/fabric-ca/ordererOrg/tls-cert.pem crypto-config/fabric-ca/ordererOrg/ca-cert.pem crypto-config/fabric-ca/ordererOrg/IssuerPublicKey crypto-config/fabric-ca/ordererOrg/IssuerRevocationPublicKey crypto-config/fabric-ca/ordererOrg/fabric-ca-server.db'
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/ordererOrg/msp crypto-config/fabric-ca/ordererOrg/tls crypto-config/fabric-ca/ordererOrg/ca-chain.pem crypto-config/fabric-ca/ordererOrg/tls-cert.pem crypto-config/fabric-ca/ordererOrg/ca-cert.pem crypto-config/fabric-ca/ordererOrg/IssuerPublicKey crypto-config/fabric-ca/ordererOrg/IssuerRevocationPublicKey crypto-config/fabric-ca/ordererOrg/fabric-ca-server.db'
     
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/tls/msp crypto-config/fabric-ca/tls/tls-cert.pem crypto-config/fabric-ca/tls/ca-cert.pem crypto-config/fabric-ca/tls/IssuerPublicKey crypto-config/fabric-ca/tls/IssuerRevocationPublicKey crypto-config/fabric-ca/tls/fabric-ca-server.db crypto-config/fabric-ca/tls/admin'
     
-    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/root/msp crypto-config/fabric-ca/root/tls-cert.pem crypto-config/fabric-ca/root/ca-cert.pem crypto-config/fabric-ca/root/IssuerPublicKey crypto-config/fabric-ca/root/IssuerRevocationPublicKey crypto-config/fabric-ca/root/fabric-ca-server.db '
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/root/msp crypto-config/fabric-ca/root/tls crypto-config/fabric-ca/root/tls-cert.pem crypto-config/fabric-ca/root/ca-cert.pem crypto-config/fabric-ca/root/IssuerPublicKey crypto-config/fabric-ca/root/IssuerRevocationPublicKey crypto-config/fabric-ca/root/fabric-ca-server.db '
     
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf Org1MSPanchors.tx Org1MSPconfig.json Org1MSPmodified_config.json Org2MSPanchors.tx Org2MSPconfig.json Org2MSPmodified_config.json config_update.json config_update.pb config_update_in_envelope.json modified_config.pb original_config.pb config_block.pb'
     
-    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/fabric-ca-server-int-ca/msp crypto-config/fabric-ca/fabric-ca-server-int-ca/tls'
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/fabric-ca-server-int-ca/msp crypto-config/fabric-ca/fabric-ca-server-int-ca/tls crypto-config/fabric-ca/fabric-ca-client'
     
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf channel-artifacts log.txt *.tar.gz'
     
