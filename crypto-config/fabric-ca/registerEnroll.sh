@@ -14,16 +14,16 @@ function createOrg1() {
   echo 'NodeOUs:
   Enable: true
   ClientOUIdentifier:
-    Certificate: cacerts/fabric-ca-7054-ca_org1.pem
+    Certificate: cacerts/fabric-ca-7054.pem
     OrganizationalUnitIdentifier: client
   PeerOUIdentifier:
-    Certificate: cacerts/fabric-ca-7054-ca_org1.pem
+    Certificate: cacerts/fabric-ca-7054.pem
     OrganizationalUnitIdentifier: peer
   AdminOUIdentifier:
-    Certificate: cacerts/fabric-ca-7054-ca_org1.pem
+    Certificate: cacerts/fabric-ca-7054.pem
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
-    Certificate: cacerts/fabric-ca-7054-ca_org1.pem
+    Certificate: cacerts/fabric-ca-7054.pem
     OrganizationalUnitIdentifier: orderer' >${PWD}/crypto-config/peerOrganizations/org1.example.com/msp/config.yaml
 
 infoln "Generating the peer0 msp"
@@ -93,16 +93,16 @@ function createOrg2() {
   echo 'NodeOUs:
   Enable: true
   ClientOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/fabric-ca-8054.pem
     OrganizationalUnitIdentifier: client
   PeerOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/fabric-ca-8054.pem
     OrganizationalUnitIdentifier: peer
   AdminOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/fabric-ca-8054.pem
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
-    Certificate: cacerts/fabric-ca-8054-ca_org2.pem
+    Certificate: cacerts/fabric-ca-8054.pem
     OrganizationalUnitIdentifier: orderer' >${PWD}/crypto-config/peerOrganizations/org2.example.com/msp/config.yaml
 
 
@@ -177,16 +177,16 @@ function createOrderer() {
   echo 'NodeOUs:
   Enable: true
   ClientOUIdentifier:
-    Certificate: cacerts/fabric-ca-9054-ca_ordererOrg.pem
+    Certificate: cacerts/fabric-ca-9054.pem
     OrganizationalUnitIdentifier: client
   PeerOUIdentifier:
-    Certificate: cacerts/fabric-ca-9054-ca_ordererOrg.pem
+    Certificate: cacerts/fabric-ca-9054.pem
     OrganizationalUnitIdentifier: peer
   AdminOUIdentifier:
-    Certificate: cacerts/fabric-ca-9054-ca_ordererOrg.pem
+    Certificate: cacerts/fabric-ca-9054.pem
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
-    Certificate: cacerts/fabric-ca-9054-ca_ordererOrg.pem
+    Certificate: cacerts/fabric-ca-9054.pem
     OrganizationalUnitIdentifier: orderer' >${PWD}/crypto-config/ordererOrganizations/example.com/msp/config.yaml
 
 
