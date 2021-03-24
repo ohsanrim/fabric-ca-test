@@ -86,7 +86,7 @@ tls:
 #############################################################################
 ca:
   # Name of this CA
-  name: org2_admin
+  name: ca_org2
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)

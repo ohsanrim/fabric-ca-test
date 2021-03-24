@@ -1,0 +1,19 @@
+version: '2'
+
+networks:
+  test:
+
+services:
+
+  ca_ordererOrg:
+    container_name: ca_ordererOrg
+    image: hyperledger/fabric-ca:latest
+    command: sh -c 'fabric-ca-server start --port 9054'
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+    volumes:
+      - $HOME/testnet/crypto-config/fabric-ca/ordererOrg:/etc/hyperledger/fabric-ca-server
+    networks:
+      - test
+    ports:
+      - 9054:9054

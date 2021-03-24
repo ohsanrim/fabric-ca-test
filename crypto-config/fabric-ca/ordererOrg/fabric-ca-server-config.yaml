@@ -86,7 +86,7 @@ tls:
 #############################################################################
 ca:
   # Name of this CA
-  name: ordererOrg_admin
+  name: ca_ordererOrg
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)

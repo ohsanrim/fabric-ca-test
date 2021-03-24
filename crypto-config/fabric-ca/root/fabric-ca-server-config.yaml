@@ -85,7 +85,7 @@ tls:
 #############################################################################
 ca:
   # Name of this CA
-  name: rcaadmin
+  name: root_ca
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)

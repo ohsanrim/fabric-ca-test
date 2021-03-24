@@ -8,7 +8,7 @@ services:
   tls-ca:
     container_name: tls-ca
     image: hyperledger/fabric-ca:latest
-    command: sh -c 'fabric-ca-server start --port 10054'
+    command: sh -c 'fabric-ca-server start -b tls-ca-admin:tls-ca-adminpw --port 10054'
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
     volumes:
