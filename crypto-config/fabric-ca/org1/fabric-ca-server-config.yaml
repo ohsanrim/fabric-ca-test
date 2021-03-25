@@ -425,7 +425,7 @@ cafiles:
 intermediate:
   parentserver: 
     url: https://rcaadmin:rcaadminpw@fabric-ca:6054
-    caname: rcaadmin
+    caname: root_ca
 
   enrollment:
     hosts: fabric-ca
