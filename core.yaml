@@ -12,19 +12,19 @@ peer:
 
     # The peer id provides a name for this peer instance and is used when
     # naming docker resources.
-    id: peer0
+    id: peer2
     # The networkId allows for logical separation of networks and is used when
     # naming docker resources.
-    networkId: peer0
+    networkId: peer2
 
     # The Address at local network interface this Peer will listen on.
     # By default, it will listen on all network interfaces
-    listenAddress: peer0:7051
+    listenAddress: peer2:7051
 
     # The endpoint this peer uses to listen for inbound chaincode connections.
     # If this is commented-out, the listen address is selected to be
     # the peer's address (see below) with port 7052
-    chaincodeListenAddress: peer0:7052
+    chaincodeListenAddress: peer2:7052
 
     # The endpoint the chaincode for this peer uses to connect to the peer.
     # If this is not specified, the chaincodeListenAddress address is selected.
@@ -32,13 +32,13 @@ peer:
     # peer address (see below). If specified peer address is invalid then it
     # will fallback to the auto detected IP (local IP) regardless of the peer
     # addressAutoDetect value.
-    chaincodeAddress: peer0:7052
+    chaincodeAddress: peer2:7052
 
     # When used as peer config, this represents the endpoint to other peers
     # in the same organization. For peers in other organization, see
     # gossip.externalEndpoint for more info.
     # When used as CLI config, this means the peer's endpoint to interact with
-    address: peer0:7051
+    address: peer2:7051
 
     # Whether the Peer should programmatically determine its address
     # This case is useful for docker containers.
@@ -85,7 +85,7 @@ peer:
         # Important: The endpoints here have to be endpoints of peers in the same
         # organization, because the peer would refuse connecting to these endpoints
         # unless they are in the same organization as the peer.
-        bootstrap: peer1:7051
+        bootstrap: peer2:7051
 
         # NOTE: orgLeader and useLeaderElection parameters are mutual exclusive.
         # Setting both to true would result in the termination of the peer
@@ -112,7 +112,7 @@ peer:
         # Overrides the endpoint that the peer publishes to peers
         # in its organization. For peers in foreign organizations
         # see 'externalEndpoint'
-        endpoint: peer0:7051
+        endpoint: peer2:7051
         # Maximum count of blocks stored in memory
         maxBlockCountToStore: 10
         # Max time between consecutive message pushes(unit: millisecond)
@@ -166,7 +166,7 @@ peer:
         msgExpirationFactor: 20
         # This is an endpoint that is published to peers outside of the organization.
         # If this isn't set, the peer will not be known to other organizations.
-        externalEndpoint: peer0:7051
+        externalEndpoint: peer2:7051
         # Leader election service configuration
         election:
             # Longest time peer waits for stable membership during leader election startup (unit: second)
@@ -264,31 +264,31 @@ peer:
         clientAuthRequired: false
         # X.509 certificate used for TLS server
         cert:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.crt 
         # Private key used for TLS server
         key:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.key 
         # rootcert.file represents the trusted root certificate chain used for verifying certificates
         # of other nodes during outbound connections.
         # It is not required to be set, but can be used to augment the set of TLS CA certificates
         # available from the MSPs of each channel’s configuration.
         rootcert:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/ca.crt 
         # If mutual TLS is enabled, clientRootCAs.files contains a list of additional root certificates
         # used for verifying certificates of client connections.
         # It augments the set of TLS CA certificates available from the MSPs of each channel’s configuration.
         # Minimally, set your organization's TLS CA root certificate so that the peer can receive join channel requests.
-        clientRootCAs: 
+        clientRootCAs:
             files:
-              -  crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt 
+              - crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/ca.crt 
         # Private key used for TLS when making client connections.
         # If not set, peer.tls.key.file will be used instead
-        clientKey: 
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key 
+        clientKey:
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.key 
         # X.509 certificate used for TLS when making client connections.
         # If not set, peer.tls.cert.file will be used instead
         clientCert:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.crt 
 
     # Authentication contains configuration parameters related to authenticating
     # client messages
@@ -329,7 +329,7 @@ peer:
             Security:
 
     # Path on the file system where peer will find MSP local configurations
-    mspConfigPath: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp 
+    mspConfigPath: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/msp 
 
     # Identifier of the local MSP
     # ----!!!!IMPORTANT!!!-!!!IMPORTANT!!!-!!!IMPORTANT!!!!----
@@ -338,7 +338,7 @@ peer:
     # to match the name of one of the MSPs in each of the channel
     # that this peer is a member of. Otherwise this peer's messages
     # will not be identified as valid by other nodes.
-    localMspId: Org1MSP
+    localMspId: Org2MSP
 
     # CLI common client config options
     client:
@@ -747,4 +747,3 @@ metrics:
 
         # prefix is prepended to all emitted statsd metrics
         prefix:
-
