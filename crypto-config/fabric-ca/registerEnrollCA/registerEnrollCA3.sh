@@ -23,6 +23,6 @@ cp $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-ca/org1_admin/msp/
 
 cp $HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem $HOME/testnet/crypto-config/fabric-ca/org1/tls/tls-ca-cert.pem
 
-fabric-ca-server start --port 7054
-#docker-compose -f docker/docker-compose-org1-ica.yaml up -d
+#fabric-ca-server start --port 7054
+docker-compose -f docker/docker-compose-org1CA.yaml up -d
 

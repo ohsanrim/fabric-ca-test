@@ -7,5 +7,5 @@ cp $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-ca/ordererOrg_admi
 
 cp $HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem $HOME/testnet/crypto-config/fabric-ca/ordererOrg/tls/tls-ca-cert.pem
 
-fabric-ca-server start --port 9054
-#docker-compose -f docker/docker-compose-ordererOrg-ica.yaml up -d
+#fabric-ca-server start --port 9054
+docker-compose -f docker/docker-compose-ordererOrgCA.yaml up -d

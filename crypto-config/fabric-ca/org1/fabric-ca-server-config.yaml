@@ -92,7 +92,7 @@ ca:
   # Certificate file (default: ca-cert.pem)
   certfile:
   # Chain file
-  chainfile:
+  chainfile: 
 
 #############################################################################
 #  The gencrl REST endpoint is used to generate a CRL that contains revoked

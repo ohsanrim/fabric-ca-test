@@ -7,4 +7,5 @@ cp $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-ca/org2_admin/msp/
 
 cp $HOME/testnet/crypto-config/fabric-ca/tls/ca-cert.pem $HOME/testnet/crypto-config/fabric-ca/org2/tls/tls-ca-cert.pem
 
-fabric-ca-server start --port 8054
+#fabric-ca-server start --port 8054
+docker-compose -f docker/docker-compose-org2CA.yaml up -d

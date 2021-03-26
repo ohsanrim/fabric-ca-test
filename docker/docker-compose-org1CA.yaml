@@ -8,7 +8,7 @@ services:
   ca_org1:
     container_name: ca_org1
     image: hyperledger/fabric-ca:latest
-    command: sh -c 'fabric-ca-server start --port 7054'
+    command: sh -c 'fabric-ca-server start -b org1_admin:org1_adminpw -u https://rcaadmin:rcaadminpw@fabric-ca:6054 --port 7054'
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
     volumes:

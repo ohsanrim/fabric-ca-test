@@ -41,5 +41,5 @@ mkdir -p $HOME/testnet/crypto-config/fabric-ca/root/tls
 
 cp $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-ca/rcaadmin/msp/signcerts/cert.pem $HOME/testnet/crypto-config/fabric-ca/root/tls && cp $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-ca/rcaadmin/msp/keystore/* $HOME/testnet/crypto-config/fabric-ca/root/tls/key.pem
 
-fabric-ca-server start --port 6054
-
+#fabric-ca-server start --port 6054
+docker-compose -f docker/docker-compose-rootCA.yaml up -d
