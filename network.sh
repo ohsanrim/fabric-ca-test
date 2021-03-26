@@ -39,10 +39,45 @@ function networkUp(){
       PWD=$HOME/testnet/peer/org2/peer
       peer node start >&log.txt
     elif [ "$TYPE" == "FABRIC_CA" ]; then
-    infoln "Generating certificates using Fabric CA"
+    
 
     #IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
+    
+    #start tls_ca
+    infoln "start tls_ca server..."
+    ./crypto-config/fabric-ca/registerEnrollCA/registerEnrollCA1.sh
+    
+    #start root_ca
+    while :
+    do
+      if [ ! -f "$HOME/testnet/crypto-config/fabric-ca/tls/tls-cert.pem" ]; then
+        sleep 1
+      else
+        break
+      fi
+    done
+    infoln "start root_ca server..."
+    ./crypto-config/fabric-ca/registerEnrollCA/registerEnrollCA2.sh
 
+    #start org1_ca
+    while :
+    do
+      if [ ! -f "$HOME/testnet/crypto-config/fabric-ca/root/ca-cert.pem" ]; then
+        sleep 1
+      else
+        break
+      fi
+    done
+    infoln "start org1_ca server..."
+    ./crypto-config/fabric-ca/registerEnrollCA/registerEnrollCA3.sh
+    #start org2_ca
+    infoln "start org2_ca server..."
+    ./crypto-config/fabric-ca/registerEnrollCA/registerEnrollCA4.sh
+    #start ordererOrg_ca
+    infoln "start ordererOrg_ca server..."
+    ./crypto-config/fabric-ca/registerEnrollCA/registerEnrollCA5.sh
+    
+    infoln "Generating certificates using Fabric CA"
     . crypto-config/fabric-ca/registerEnrollCA.sh
 
   while :
