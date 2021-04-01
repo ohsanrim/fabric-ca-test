@@ -1,0 +1,14 @@
+NodeOUs:
+  Enable: true
+  ClientOUIdentifier:
+    Certificate: intermediatecerts/fabric-ca-9054.pem
+    OrganizationalUnitIdentifier: client
+  PeerOUIdentifier:
+    Certificate: intermediatecerts/fabric-ca-9054.pem
+    OrganizationalUnitIdentifier: peer
+  AdminOUIdentifier:
+    Certificate: intermediatecerts/fabric-ca-9054.pem
+    OrganizationalUnitIdentifier: admin
+  OrdererOUIdentifier:
+    Certificate: intermediatecerts/fabric-ca-9054.pem
+    OrganizationalUnitIdentifier: orderer

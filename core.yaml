@@ -20,7 +20,6 @@ peer:
     # The Address at local network interface this Peer will listen on.
     # By default, it will listen on all network interfaces
     listenAddress: localhost:7051
-
     # The endpoint this peer uses to listen for inbound chaincode connections.
     # If this is commented-out, the listen address is selected to be
     # the peer's address (see below) with port 7052
@@ -85,7 +84,7 @@ peer:
         # Important: The endpoints here have to be endpoints of peers in the same
         # organization, because the peer would refuse connecting to these endpoints
         # unless they are in the same organization as the peer.
-        bootstrap: peer1:7051
+        bootstrap: localhost:7051
 
         # NOTE: orgLeader and useLeaderElection parameters are mutual exclusive.
         # Setting both to true would result in the termination of the peer
@@ -264,31 +263,31 @@ peer:
         clientAuthRequired: false
         # X.509 certificate used for TLS server
         cert:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.crt 
         # Private key used for TLS server
         key:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.key 
         # rootcert.file represents the trusted root certificate chain used for verifying certificates
         # of other nodes during outbound connections.
         # It is not required to be set, but can be used to augment the set of TLS CA certificates
         # available from the MSPs of each channel’s configuration.
         rootcert:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/ca.crt 
         # If mutual TLS is enabled, clientRootCAs.files contains a list of additional root certificates
         # used for verifying certificates of client connections.
         # It augments the set of TLS CA certificates available from the MSPs of each channel’s configuration.
         # Minimally, set your organization's TLS CA root certificate so that the peer can receive join channel requests.
-        clientRootCAs: 
+        clientRootCAs:
             files:
-              -  crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt 
+              - crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/ca.crt 
         # Private key used for TLS when making client connections.
         # If not set, peer.tls.key.file will be used instead
-        clientKey: 
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key 
+        clientKey:
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.key 
         # X.509 certificate used for TLS when making client connections.
         # If not set, peer.tls.cert.file will be used instead
         clientCert:
-            file: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt 
+            file: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/tls/server.crt 
 
     # Authentication contains configuration parameters related to authenticating
     # client messages
@@ -329,7 +328,7 @@ peer:
             Security:
 
     # Path on the file system where peer will find MSP local configurations
-    mspConfigPath: crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp 
+    mspConfigPath: crypto-config/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/msp 
 
     # Identifier of the local MSP
     # ----!!!!IMPORTANT!!!-!!!IMPORTANT!!!-!!!IMPORTANT!!!!----
@@ -338,7 +337,7 @@ peer:
     # to match the name of one of the MSPs in each of the channel
     # that this peer is a member of. Otherwise this peer's messages
     # will not be identified as valid by other nodes.
-    localMspId: Org1MSP
+    localMspId: Org2MSP
 
     # CLI common client config options
     client:
@@ -747,4 +746,3 @@ metrics:
 
         # prefix is prepended to all emitted statsd metrics
         prefix:
-
