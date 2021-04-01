@@ -12,19 +12,19 @@ peer:
 
     # The peer id provides a name for this peer instance and is used when
     # naming docker resources.
-    id: peer0
+    id: localhost
     # The networkId allows for logical separation of networks and is used when
     # naming docker resources.
-    networkId: peer0
+    networkId: localhost
 
     # The Address at local network interface this Peer will listen on.
     # By default, it will listen on all network interfaces
-    listenAddress: peer0:7051
+    listenAddress: localhost:7051
 
     # The endpoint this peer uses to listen for inbound chaincode connections.
     # If this is commented-out, the listen address is selected to be
     # the peer's address (see below) with port 7052
-    chaincodeListenAddress: peer0:7052
+    chaincodeListenAddress: localhost:7052
 
     # The endpoint the chaincode for this peer uses to connect to the peer.
     # If this is not specified, the chaincodeListenAddress address is selected.
@@ -32,13 +32,13 @@ peer:
     # peer address (see below). If specified peer address is invalid then it
     # will fallback to the auto detected IP (local IP) regardless of the peer
     # addressAutoDetect value.
-    chaincodeAddress: peer0:7052
+    chaincodeAddress: localhost:7052
 
     # When used as peer config, this represents the endpoint to other peers
     # in the same organization. For peers in other organization, see
     # gossip.externalEndpoint for more info.
     # When used as CLI config, this means the peer's endpoint to interact with
-    address: peer0:7051
+    address: localhost:7051
 
     # Whether the Peer should programmatically determine its address
     # This case is useful for docker containers.
@@ -112,7 +112,7 @@ peer:
         # Overrides the endpoint that the peer publishes to peers
         # in its organization. For peers in foreign organizations
         # see 'externalEndpoint'
-        endpoint: peer0:7051
+        endpoint: localhost:7051
         # Maximum count of blocks stored in memory
         maxBlockCountToStore: 10
         # Max time between consecutive message pushes(unit: millisecond)
@@ -166,7 +166,7 @@ peer:
         msgExpirationFactor: 20
         # This is an endpoint that is published to peers outside of the organization.
         # If this isn't set, the peer will not be known to other organizations.
-        externalEndpoint: peer0:7051
+        externalEndpoint: localhost:7051
         # Leader election service configuration
         election:
             # Longest time peer waits for stable membership during leader election startup (unit: second)
