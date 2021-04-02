@@ -16,9 +16,9 @@ function createTLS(){
 }
 function createOrg1() {
   infoln "Enrolling the CA admin"
-  mkdir -p crypto-config/peerOrganizations/org1.example.com/
+  mkdir -p crypto-config/peerOrganizations/org1.wizchain.net/
 
-  export FABRIC_CA_CLIENT_HOME=${PWD}/crypto-config/peerOrganizations/org1.example.com/
+  export FABRIC_CA_CLIENT_HOME=${PWD}/crypto-config/peerOrganizations/org1.wizchain.net/
 
   set -x
   fabric-ca-client enroll -u https://org1_admin:org1_adminpw@fabric-ca:7054 --tls.certfiles $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-root-cert/tls-ca-cert.pem
@@ -49,9 +49,9 @@ function createOrg1() {
 
 function createOrg2() {
   infoln "Enrolling the CA admin"
-  mkdir -p crypto-config/peerOrganizations/org2.example.com/
+  mkdir -p crypto-config/peerOrganizations/org2.wizchain.net/
 
-  export FABRIC_CA_CLIENT_HOME=${PWD}/crypto-config/peerOrganizations/org2.example.com/
+  export FABRIC_CA_CLIENT_HOME=${PWD}/crypto-config/peerOrganizations/org2.wizchain.net/
 
   set -x
   fabric-ca-client enroll -u https://org2_admin:org2_adminpw@fabric-ca:8054 --tls.certfiles $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-root-cert/tls-ca-cert.pem
@@ -82,12 +82,12 @@ function createOrg2() {
 
 function createOrderer0() {
   infoln "Enrolling the CA admin"
-  mkdir -p crypto-config/ordererOrganizations/example.com
+  mkdir -p crypto-config/ordererOrganizations/wizchain.net
   
-  export FABRIC_CA_CLIENT_HOME=${PWD}/crypto-config/ordererOrganizations/example.com
+  export FABRIC_CA_CLIENT_HOME=${PWD}/crypto-config/ordererOrganizations/wizchain.net
 
   set -x
-  fabric-ca-client enroll -u https://ordererOrg_admin:ordererOrg_adminpw@fabric-ca:9054 -M ${PWD}/crypto-config/ordererOrganizations/example.com/msp --tls.certfiles $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-root-cert/tls-ca-cert.pem
+  fabric-ca-client enroll -u https://ordererOrg_admin:ordererOrg_adminpw@fabric-ca:9054 -M ${PWD}/crypto-config/ordererOrganizations/wizchain.net/msp --tls.certfiles $HOME/testnet/crypto-config/fabric-ca/fabric-ca-client/tls-root-cert/tls-ca-cert.pem
   { set +x; } 2>/dev/null
 
 

@@ -18,16 +18,16 @@ createAnchorPeerUpdate() {
   infoln "Generating anchor peer update transaction for Org${ORG} on channel $CHANNEL_NAME"
 
   if [ $ORG -eq 0 ]; then
-    HOST="peer0"
+    HOST="peer0.org1.wizchain.net"
     PORT=7051
   elif [ $ORG -eq 1 ]; then
-    HOST="peer1"
+    HOST="peer1.org1.wizchain.net"
     PORT=7051
   elif [ $ORG -eq 2 ]; then
-    HOST="peer2"
+    HOST="peer2.org2.wizchain.net"
     PORT=7051
   elif [ $ORG -eq 3 ]; then
-    HOST="peer3"
+    HOST="peer3.org2.wizchain.net"
     PORT=7051    
   else
     errorln "Org${ORG} unknown"
@@ -45,7 +45,7 @@ createAnchorPeerUpdate() {
 }
 
 updateAnchorPeer() {
-  peer channel update -o orderer0:7050 --ordererTLSHostnameOverride orderer0 -c $CHANNEL_NAME -f ${CORE_PEER_LOCALMSPID}anchors.tx --tls --cafile $ORDERER_CA >&log.txt
+  peer channel update -o orderer0.wizchain.net:7050 --ordererTLSHostnameOverride orderer0.wizchain.net -c $CHANNEL_NAME -f ${CORE_PEER_LOCALMSPID}anchors.tx --tls --cafile $ORDERER_CA >&log.txt
   res=$?
   cat log.txt
   verifyResult $res "Anchor peer update failed"

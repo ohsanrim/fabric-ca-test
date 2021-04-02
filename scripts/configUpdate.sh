@@ -20,7 +20,7 @@ fetchChannelConfig() {
 
   infoln "Fetching the most recent configuration block for the channel"
   set -x
-  peer channel fetch config config_block.pb -o orderer0:7050 --ordererTLSHostnameOverride orderer0 -c $CHANNEL --tls --cafile $ORDERER_CA
+  peer channel fetch config config_block.pb -o orderer0.wizchain.net:7050 --ordererTLSHostnameOverride orderer0.wizchain.net -c $CHANNEL --tls --cafile $ORDERER_CA
   { set +x; } 2>/dev/null
 
   infoln "Decoding config block to JSON and isolating config to ${OUTPUT}"

@@ -13,7 +13,7 @@
 ################################################################################
 General:
     # Listen address: The IP on which to bind to listen.
-    ListenAddress: orderer0
+    ListenAddress: orderer0.wizchain.net
 
     # Listen port: The port on which to bind to listen.
     ListenPort: 7050
@@ -22,14 +22,14 @@ General:
     TLS:
         Enabled: true
         # PrivateKey governs the file location of the private key of the TLS certificate.
-        PrivateKey: crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/server.key
+        PrivateKey: crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/server.key
         # Certificate governs the file location of the server TLS certificate.
-        Certificate: crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/server.crt
+        Certificate: crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/server.crt
         RootCAs:
-          - crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/ca.crt
+          - crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/ca.crt
         ClientAuthRequired: false
         ClientRootCAs: 
-          - crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/ca.crt
+          - crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/ca.crt
     # Keepalive settings for the GRPC server.
     Keepalive:
         # ServerMinInterval is the minimum permitted time between client pings.
@@ -50,9 +50,9 @@ General:
         SendBufferSize: 10
         # ClientCertificate governs the file location of the client TLS certificate
         # used to establish mutual TLS connections with other ordering service nodes.
-        ClientCertificate: crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/server.crt
+        ClientCertificate: crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/server.crt
         # ClientPrivateKey governs the file location of the private key of the client TLS certificate.
-        ClientPrivateKey: crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/tls/server.key
+        ClientPrivateKey: crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/server.key
         # The below 4 properties should be either set together, or be unset together.
         # If they are set, then the orderer node uses a separate listener for intra-cluster
         # communication. If they are unset, then the general orderer listener is used.
@@ -87,7 +87,7 @@ General:
     # LocalMSPDir is where to find the private crypto material needed by the
     # orderer. It is set relative here as a default for dev environments but
     # should be changed to the real location in production.
-    LocalMSPDir: crypto-config/ordererOrganizations/example.com/orderers/orderer0.example.com/msp
+    LocalMSPDir: crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/msp
 
     # LocalMSPID is the identity to register the local MSP material with the MSP
     # manager. IMPORTANT: The local MSP ID of an orderer needs to match the MSP
