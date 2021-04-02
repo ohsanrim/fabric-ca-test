@@ -19,24 +19,24 @@ function networkUp(){
   if [  "$CRYPTO" == "Certificate Authorities" ]; then
     #start with CA
     if [ "$TYPE" == "orderer0" ]; then
+      cp $HOME/testnet/peer/org1/peer0/core.yaml $HOME/testnet
       ./crypto-config/fabric-ca/registerEnroll.sh all
       configtxgen -profile TwoOrgsOrdererGenesis -channelID system-channel -outputBlock system-genesis-block/genesis.block
       orderer start
     elif [ "$TYPE" == "peer0" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh org1
-      PWD=$HOME/testnet/peer/org1/peer0
+      cp $HOME/testnet/peer/org1/peer0/core.yaml $HOME/testnet
       peer node start >&log.txt
     elif [ "$TYPE" == "peer1" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh org1
-      PWD=$HOME/testnet/peer/org1/peer1
+      cp $HOME/testnet/peer/org1/peer1/core.yaml $HOME/testnet
       peer node start >&log.txt
     elif [ "$TYPE" == "peer2" ]; then
       ./crypto-config/fabric-ca/registerEnroll.sh org2
-      PWD=$HOME/testnet/peer/org2/peer2
+      cp $HOME/testnet/peer/org2/peer2/core.yaml $HOME/testnet
       peer node start >&log.txt 
     elif [ "$TYPE" == "peer3" ]; then 
       ./crypto-config/fabric-ca/registerEnroll.sh $TYPE
-      PWD=$HOME/testnet/peer/org2/peer
       peer node start >&log.txt
     elif [ "$TYPE" == "FABRIC_CA" ]; then
     
@@ -150,7 +150,7 @@ function stopOrderer(){
     #Cleanup images
     removeUnwantedImages
 infoln "Stopping network" 
-    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf system-genesis-block/*.block crypto-config/peerOrganizations crypto-config/ordererOrganizations'
+    docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf system-genesis-block/*.block crypto-config/peerOrganizations crypto-config/ordererOrganizations core.yaml'
      
     docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf crypto-config/fabric-ca/org1/msp crypto-config/fabric-ca/org1/tls crypto-config/fabric-ca/org1/ca-chain.pem crypto-config/fabric-ca/org1/ca-cert.pem crypto-config/fabric-ca/org1/tls-cert.pem crypto-config/fabric-ca/org1/IssuerPublicKey crypto-config/fabric-ca/org1/IssuerRevocationPublicKey crypto-config/fabric-ca/org1/fabric-ca-server.db'
     
