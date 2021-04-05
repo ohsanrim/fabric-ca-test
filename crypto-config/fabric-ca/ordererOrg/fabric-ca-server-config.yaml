@@ -129,8 +129,8 @@ registry:
 
   # Contains identity information which is used when LDAP is disabled
   identities:
-     - name: ordererOrg_admin
-       pass: ordererOrg_adminpw
+     - name: admin
+       pass: adminpw
        type: client
        affiliation: ""
        attrs:
