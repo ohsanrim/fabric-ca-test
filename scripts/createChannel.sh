@@ -29,7 +29,7 @@ createChannel() {
 export CORE_PEER_LOCALMSPID="Org1MSP"
 export CORE_PEER_TLS_ROOTCERT_FILE=crypto-config/peerOrganizations/org1.wizchain.net/peers/peer0.org1.wizchain.net/tls/ca.crt
 export CORE_PEER_MSPCONFIGPATH=crypto-config/peerOrganizations/org1.wizchain.net/users/Admin@org1.wizchain.net/msp
-export CORE_PEER_ADDRESS=peer0:7051
+export CORE_PEER_ADDRESS=peer0.org1.wizchain.net:7051
 
 peer channel create -o orderer0.wizchain.net:7050 -c $CHANNEL_NAME --ordererTLSHostnameOverride orderer0.wizchain.net -f ./channel-artifacts/${CHANNEL_NAME}.tx --outputBlock $BLOCKFILE --tls --cafile crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/msp/tlscacerts/tlsca.wizchain.net-cert.pem >&log.txt
 

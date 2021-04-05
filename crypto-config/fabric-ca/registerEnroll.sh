@@ -208,7 +208,7 @@ function createOrderer() {
   cp ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/keystore/* ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/server.key
 
   mkdir -p ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/msp/tlscacerts
-  cp ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/tlscacerts/* ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0./msp/tlscacerts/tlsca.wizchain.net-cert.pem
+  cp ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/tlscacerts/* ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/msp/tlscacerts/tlsca.wizchain.net-cert.pem
 
   mkdir -p ${PWD}/crypto-config/ordererOrganizations/wizchain.net/msp/tlscacerts
   cp ${PWD}/crypto-config/ordererOrganizations/wizchain.net/orderers/orderer0.wizchain.net/tls/tlscacerts/* ${PWD}/crypto-config/ordererOrganizations/wizchain.net/msp/tlscacerts/tlsca.wizchain.net-cert.pem
