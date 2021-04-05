@@ -244,10 +244,10 @@ ldap:
 #############################################################################
 affiliations:
    org1:
-      - department1
+      - department
       - department2
    org2:
-      - department1
+      - department
 
 #############################################################################
 #  Signing section
